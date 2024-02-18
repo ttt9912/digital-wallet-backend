@@ -1,0 +1,4 @@
+natwest.client:
+  url: https://ob.sandbox.natwest.com/open-banking/v3.1/aisp
+  # Uncomment line below and insert your access token
+  # accesstoken: Bearer eyJhbGciOiJSU...

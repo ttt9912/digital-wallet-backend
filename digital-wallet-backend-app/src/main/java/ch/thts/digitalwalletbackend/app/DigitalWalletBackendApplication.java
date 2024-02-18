@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 public class DigitalWalletBackendApplication {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(DigitalWalletBackendApplication.class, args);
     }
 }
