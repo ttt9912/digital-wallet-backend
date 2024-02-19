@@ -2,14 +2,15 @@ package ch.thts.digitalwalletbackend.natwestclient.account;
 
 import ch.thts.digitalwalletbackend.business.accounts.Account;
 import ch.thts.digitalwalletbackend.business.accounts.NatWestAccountsClient;
+import ch.thts.digitalwalletbackend.business.accounts.AccountTransaction;
 import ch.thts.digitalwalletbackend.natwestclient.account.converter.AccountConverter;
-import ch.thts.digitalwalletbackend.natwestclient.account.model.NatWestAccount;
-import ch.thts.digitalwalletbackend.natwestclient.account.model.NatWestAccountBalance;
-import ch.thts.digitalwalletbackend.natwestclient.account.model.NatWestAccountBalanceResponse;
-import ch.thts.digitalwalletbackend.natwestclient.account.model.NatWestAccountsResponse;
+import ch.thts.digitalwalletbackend.natwestclient.account.converter.AccountTransactionConverter;
+import ch.thts.digitalwalletbackend.natwestclient.account.converter.AmountConverter;
+import ch.thts.digitalwalletbackend.natwestclient.account.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,7 +27,7 @@ public class NatWestAccountClientImpl implements NatWestAccountsClient {
     }
 
     @Override
-    public List<Account> findAll() {
+    public List<Account> findAccounts() {
         final NatWestAccountsResponse response = natWestAccountRestClient.getAccounts(accessToken);
         final List<NatWestAccount> accounts = response.data().accounts();
         return accounts.stream()
@@ -35,8 +36,10 @@ public class NatWestAccountClientImpl implements NatWestAccountsClient {
     }
 
     private Account createAccount(final NatWestAccount natWestAccount) {
-        final NatWestAccountBalance natWestAccountBalance = findAccountBalance(natWestAccount.accountId()).orElse(null);
-        return AccountConverter.convert(natWestAccount, natWestAccountBalance);
+        final BigDecimal accountBalance = findAccountBalance(natWestAccount.accountId())
+                .map(balance -> AmountConverter.convert(balance.amount().amount(), balance.creditDebitIndicator()))
+                .orElse(null);
+        return AccountConverter.convert(natWestAccount, accountBalance);
     }
 
     public Optional<NatWestAccountBalance> findAccountBalance(final String accountId) {
@@ -45,4 +48,13 @@ public class NatWestAccountClientImpl implements NatWestAccountsClient {
                 .filter(b -> Objects.equals(b.type(), "ForwardAvailable"))
                 .findFirst();
     }
+
+    @Override
+    public List<AccountTransaction> findAccountTransactions(final String accountId) {
+        final NatWestTransactionResponse response = natWestAccountRestClient.getTransactions(accessToken, accountId);
+        return response.data().transactions().stream()
+                .map(AccountTransactionConverter::convert)
+                .toList();
+    }
+
 }

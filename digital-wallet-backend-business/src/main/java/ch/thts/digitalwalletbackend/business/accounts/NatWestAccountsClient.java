@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface NatWestAccountsClient {
 
-    List<Account> findAll();
+    List<Account> findAccounts();
 
+    List<AccountTransaction> findAccountTransactions(String accountId);
 }

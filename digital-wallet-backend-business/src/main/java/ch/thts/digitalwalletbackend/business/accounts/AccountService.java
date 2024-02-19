@@ -11,6 +11,10 @@ public class AccountService {
     private final NatWestAccountsClient natWestAccountsClient;
 
     public List<Account> findAll() {
-        return natWestAccountsClient.findAll();
+        return natWestAccountsClient.findAccounts();
+    }
+
+    public List<AccountTransaction> findAccountTransactions(final String accountId) {
+        return natWestAccountsClient.findAccountTransactions(accountId);
     }
 }
