@@ -11,17 +11,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class AmountConverterTest {
 
     @Test
-    void convertBalance_convertsCreditAmount() {
-        final String amount = "19646.25";
+    void convertBalance_convertsAndRoundsCreditAmount() {
         final String creditDebitIndicator = "Credit";
-        assertEquals(AmountConverter.convert(amount, creditDebitIndicator), BigDecimal.valueOf(19646.25));
+        assertEquals(new BigDecimal("12.35"), AmountConverter.convert("12.374", creditDebitIndicator));
+        assertEquals(new BigDecimal("12.40"), AmountConverter.convert("12.375", creditDebitIndicator));
     }
 
     @Test
-    void convertBalance_convertsDebitAmountNegative() {
-        final String amount = "19646.25";
+    void convertBalance_convertsAndRoundsDebitAmountNegative() {
         final String creditDebitIndicator = "Debit";
-        assertEquals(AmountConverter.convert(amount, creditDebitIndicator), BigDecimal.valueOf(-19646.25));
+        assertEquals(new BigDecimal("-12.35"), AmountConverter.convert("12.374", creditDebitIndicator));
+        assertEquals(new BigDecimal("-12.40"), AmountConverter.convert("12.375", creditDebitIndicator));
     }
 
     @Test

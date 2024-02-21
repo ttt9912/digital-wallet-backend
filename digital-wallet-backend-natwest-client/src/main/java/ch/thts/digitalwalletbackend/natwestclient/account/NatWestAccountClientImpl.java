@@ -5,15 +5,12 @@ import ch.thts.digitalwalletbackend.business.accounts.NatWestAccountsClient;
 import ch.thts.digitalwalletbackend.business.accounts.AccountTransaction;
 import ch.thts.digitalwalletbackend.natwestclient.account.converter.AccountConverter;
 import ch.thts.digitalwalletbackend.natwestclient.account.converter.AccountTransactionConverter;
-import ch.thts.digitalwalletbackend.natwestclient.account.converter.AmountConverter;
 import ch.thts.digitalwalletbackend.natwestclient.account.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Component
 public class NatWestAccountClientImpl implements NatWestAccountsClient {
@@ -28,31 +25,29 @@ public class NatWestAccountClientImpl implements NatWestAccountsClient {
 
     @Override
     public List<Account> findAccounts() {
-        final NatWestAccountsResponse response = natWestAccountRestClient.getAccounts(accessToken);
-        final List<NatWestAccount> accounts = response.data().accounts();
-        return accounts.stream()
-                .map(this::createAccount)
+        return natWestAccountRestClient.getAccounts(accessToken).data().accounts().stream()
+                .map(natWestAccount -> AccountConverter.convert(natWestAccount, findForwardAvailableAccountBalance(natWestAccount.accountId())))
                 .toList();
     }
 
     @Override
     public Account findByAccountId(final String accountId) {
-        final NatWestAccount natWestAccount = natWestAccountRestClient.getAccount(accessToken, accountId).data().accounts().getFirst();
-        return this.createAccount(natWestAccount);
+        return natWestAccountRestClient.getAccount(accessToken, accountId).data().accounts().stream()
+                .findFirst()
+                .map(natWestAccount -> AccountConverter.convert(natWestAccount, findForwardAvailableAccountBalance(natWestAccount.accountId())))
+                .orElseThrow();
     }
 
-    private Account createAccount(final NatWestAccount natWestAccount) {
-        final BigDecimal accountBalance = findAccountBalance(natWestAccount.accountId())
-                .map(balance -> AmountConverter.convert(balance.amount().amount(), balance.creditDebitIndicator()))
-                .orElse(null);
-        return AccountConverter.convert(natWestAccount, accountBalance);
-    }
-
-    public Optional<NatWestAccountBalance> findAccountBalance(final String accountId) {
+    /*
+     * Type "ForwardAvailable" represents the current balance
+     * https://www.bankofapis.com/products/natwest-group-open-banking/accounts/documentation/nwb/3.1.11#balances
+     */
+    public NatWestAccountBalance findForwardAvailableAccountBalance(final String accountId) {
         final NatWestAccountBalanceResponse response = natWestAccountRestClient.getBalances(accessToken, accountId);
         return response.data().balances().stream()
                 .filter(b -> Objects.equals(b.type(), "ForwardAvailable"))
-                .findFirst();
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
