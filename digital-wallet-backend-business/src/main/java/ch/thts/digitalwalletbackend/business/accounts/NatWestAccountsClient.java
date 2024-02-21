@@ -6,5 +6,8 @@ public interface NatWestAccountsClient {
 
     List<Account> findAccounts();
 
+    Account findByAccountId(String accountId);
+
     List<AccountTransaction> findAccountTransactions(String accountId);
+
 }

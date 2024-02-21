@@ -35,6 +35,12 @@ public class NatWestAccountClientImpl implements NatWestAccountsClient {
                 .toList();
     }
 
+    @Override
+    public Account findByAccountId(final String accountId) {
+        final NatWestAccount natWestAccount = natWestAccountRestClient.getAccount(accessToken, accountId).data().accounts().getFirst();
+        return this.createAccount(natWestAccount);
+    }
+
     private Account createAccount(final NatWestAccount natWestAccount) {
         final BigDecimal accountBalance = findAccountBalance(natWestAccount.accountId())
                 .map(balance -> AmountConverter.convert(balance.amount().amount(), balance.creditDebitIndicator()))

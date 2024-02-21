@@ -12,6 +12,9 @@ public interface NatWestAccountRestClient {
     @GetExchange("/accounts")
     NatWestAccountsResponse getAccounts(@RequestHeader("Authorization") String jwt);
 
+    @GetExchange("/accounts/{AccountId}")
+    NatWestAccountsResponse getAccount(@RequestHeader("Authorization") String jwt, @PathVariable("AccountId") String accountId);
+
     @GetExchange("/accounts/{AccountId}/balances")
     NatWestAccountBalanceResponse getBalances(@RequestHeader("Authorization") String jwt, @PathVariable("AccountId") String accountId);
 

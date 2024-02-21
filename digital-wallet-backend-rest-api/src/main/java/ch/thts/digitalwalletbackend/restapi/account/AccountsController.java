@@ -4,11 +4,7 @@ import ch.thts.digitalwalletbackend.business.accounts.Account;
 import ch.thts.digitalwalletbackend.business.accounts.AccountService;
 import ch.thts.digitalwalletbackend.business.accounts.AccountTransaction;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,8 +20,13 @@ public class AccountsController {
         return accountService.findAll();
     }
 
+    @GetMapping("/{accountId}")
+    public Account findByAccountId(@PathVariable("accountId") final String accountId) {
+        return accountService.findByAccountId(accountId);
+    }
+
     @GetMapping("/{accountId}/transactions")
-    public List<AccountTransaction> findTransactions(@PathVariable("accountId") final String accountId) {
+    public List<AccountTransaction> findAccountTransactions(@PathVariable("accountId") final String accountId) {
         return accountService.findAccountTransactions(accountId);
     }
 }
