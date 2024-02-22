@@ -12,18 +12,18 @@ Due to time limitations, some features have been considered out-of-scope, includ
 # Acceptance criteria
 
 ### Requirement 1
-- **(:white_check_mark: Done)** Die einzelnen Kontostände sowie eine Gesamtsumme über alle Konti hinweg soll sichtbar sein. 
-- **(:white_check_mark: Done)** Es ist ersichtlich, welche Summe welchem Konto / Bankbeziehung entstammt. Interaktionen 
-- **(:white_check_mark: Done)** Der Benutzer soll mit einem Klick auf ein Konto eine Detailsicht des jeweiligen Kontos kommen. 
-- **(:white_check_mark: Done)** Alle Geldbeträge sollen auf 5 Rappen und 2 Dezimal gerundet werden 
-- **(:white_check_mark: Done)** Sollte der Kontostand einzeln oder in der Summe negativ sein, so soll die Summe in rot dargestellt werden.
+- **(Done)** Die einzelnen Kontostände sowie eine Gesamtsumme über alle Konti hinweg soll sichtbar sein. 
+- **(Done)** Es ist ersichtlich, welche Summe welchem Konto / Bankbeziehung entstammt. Interaktionen 
+- **(Done)** Der Benutzer soll mit einem Klick auf ein Konto eine Detailsicht des jeweiligen Kontos kommen. 
+- **(Done)** Alle Geldbeträge sollen auf 5 Rappen und 2 Dezimal gerundet werden 
+- **(Done)** Sollte der Kontostand einzeln oder in der Summe negativ sein, so soll die Summe in rot dargestellt werden.
 
 ### Requirement 2 (optional)
-- **(:white_check_mark: Done)** Transaktionen sollen im Minimum mit Betrag sowie Datum ausgewiesen werden.
-- **(:white_check_mark: Done)** Transaktionen sollen nach dem Datum sortierbar sein (auf- und absteigend). 
-- **(:white_check_mark: Done)** Alle Geldbeträge sollen auf 5 Rappen gerundet werden
-- **(:white_check_mark: Done)** Sollte der Kontostand einzeln oder in der Summe negativ sein, so soll die Summe in rot dargestellt werden.
-- **(:white_check_mark: By design)** Prüfung, ob ein Konto zugriffsberechtigt ist (Stichwort „Customer Consent“)
+- **(Done)** Transaktionen sollen im Minimum mit Betrag sowie Datum ausgewiesen werden.
+- **(Done)** Transaktionen sollen nach dem Datum sortierbar sein (auf- und absteigend). 
+- **(Done)** Alle Geldbeträge sollen auf 5 Rappen gerundet werden
+- **(Done)** Sollte der Kontostand einzeln oder in der Summe negativ sein, so soll die Summe in rot dargestellt werden.
+- **(By design)** Prüfung, ob ein Konto zugriffsberechtigt ist (Stichwort „Customer Consent“)
 
 # System overview
 ![System overview](img/SystemOverview.png)
