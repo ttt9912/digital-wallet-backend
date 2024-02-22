@@ -19,6 +19,10 @@ Due to time limitations, some features have been considered out-of-scope, includ
 
 Diagram shows the backend modules and their dependencies.
 
+**[12-Factor App](https://12factor.net/)** serves as a general guideline for the overall design.
+
+**[Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software))** is applied to facilitate modularity, scalability, and testability by decoupling the core application logic from external dependencies, enabling easier maintenance and evolution of software systems.
+
 # Improvements
 What needs to be done to run and maintain this app in a productive environment?
 
