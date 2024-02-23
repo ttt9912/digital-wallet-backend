@@ -1,8 +1,8 @@
 package ch.thts.digitalwalletbackend.natwestclient.account;
 
-import ch.thts.digitalwalletbackend.business.accounts.Account;
-import ch.thts.digitalwalletbackend.business.accounts.NatWestAccountsClient;
-import ch.thts.digitalwalletbackend.business.accounts.AccountTransaction;
+import ch.thts.digitalwalletbackend.business.account.Account;
+import ch.thts.digitalwalletbackend.business.account.NatWestAccountsClient;
+import ch.thts.digitalwalletbackend.business.account.AccountTransaction;
 import ch.thts.digitalwalletbackend.natwestclient.account.converter.AccountConverter;
 import ch.thts.digitalwalletbackend.natwestclient.account.converter.AccountTransactionConverter;
 import ch.thts.digitalwalletbackend.natwestclient.account.model.*;

@@ -1,8 +1,8 @@
 package ch.thts.digitalwalletbackend.restapi.account;
 
-import ch.thts.digitalwalletbackend.business.accounts.Account;
-import ch.thts.digitalwalletbackend.business.accounts.AccountService;
-import ch.thts.digitalwalletbackend.business.accounts.AccountTransaction;
+import ch.thts.digitalwalletbackend.business.account.Account;
+import ch.thts.digitalwalletbackend.business.account.AccountService;
+import ch.thts.digitalwalletbackend.business.account.AccountTransaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/accounts")
 @RequiredArgsConstructor
-public class AccountsController {
+public class AccountController {
     private final AccountService accountService;
 
     @GetMapping

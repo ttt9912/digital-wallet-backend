@@ -1,4 +1,4 @@
-package ch.thts.digitalwalletbackend.business.accounts;
+package ch.thts.digitalwalletbackend.business.account;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

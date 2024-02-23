@@ -1,6 +1,6 @@
 package ch.thts.digitalwalletbackend.natwestclient.account.converter;
 
-import ch.thts.digitalwalletbackend.business.accounts.AccountTransaction;
+import ch.thts.digitalwalletbackend.business.account.AccountTransaction;
 import ch.thts.digitalwalletbackend.natwestclient.account.model.NatWestTransaction;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

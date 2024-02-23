@@ -1,4 +1,4 @@
-package ch.thts.digitalwalletbackend.business.accounts;
+package ch.thts.digitalwalletbackend.business.account;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
